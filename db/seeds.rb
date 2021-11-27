@@ -6,18 +6,25 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-users =[
-  {email: "admin@gmail.com", password: "291ABASD932"},
-  {email: "usuario1@gmail.com", password: "291ABASD934"},
-  {email: "usuario2@gmail.com", password: "281ABASD932"}
-]
 
-users.each { |user| User.create(user)}
+user_1 = User.create(email: "admin@gmail.com", password: "291ABASD932")
+user_2 = User.create(email: "usuario1@gmail.com", password: "291ABASD934")
+user_3 = User.create(email: "usuario2@gmail.com", password: "281ABASD932")
 
+users = User.all
+status = ["Prospecto", "Interesado", "Cliente"]
 
-
-
-
-# rails g model Lead name:srting surname:string telephone:string email:string status:string user:references
-# rails g model Talk message:text
-# rails g model LeadTalk lead:references talk:references user:references
+10.times do
+  lead = Lead.create(
+    name: Faker::Name.first_name,
+    surname: Faker::Name.last_name,
+    telephone: Faker::PhoneNumber.cell_phone_in_e164,
+    email: Faker::Internet.email,
+    user: users.sample,
+    status: status.sample
+  )
+  rand(0..5).times do
+    talk = Talk.create(message: Faker::Quote.famous_last_words)
+    LeadTalk.create(talk: talk, lead: lead, user: users.sample)
+  end
+end
