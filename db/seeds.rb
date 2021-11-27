@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 users =[
-  {user: "admin@gmail.com", password: "291ABASD932"},
-  {user: "usuario1@gmail.com", password: "291ABASD934"},
-  {user: "usuario2@gmail.com", password: "281ABASD932"}
+  {email: "admin@gmail.com", password: "291ABASD932"},
+  {email: "usuario1@gmail.com", password: "291ABASD934"},
+  {email: "usuario2@gmail.com", password: "281ABASD932"}
 ]
 
 users.each { |user| User.create(user)}
