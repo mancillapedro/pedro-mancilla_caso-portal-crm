@@ -1,7 +1,7 @@
 class CreateLeads < ActiveRecord::Migration[6.0]
   def change
     create_table :leads do |t|
-      t.srting :name
+      t.string :name
       t.string :surname
       t.string :telephone
       t.string :email
