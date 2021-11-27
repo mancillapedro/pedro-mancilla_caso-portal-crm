@@ -1,0 +1,65 @@
+<%= tag.div class:"container mt-5" do %>
+
+  <%= tag.div class: "d-flex align-items-end mb-5" do %>
+    <h1>Prospectos</h1>
+    <p class="h2 ml-2">|</p>
+    <%= link_to "Ingresar nuevo Prospecto", new_lead_path, class:"h2 ml-2" %>
+  <% end %>
+
+  <%= tag.div class:"d-flex justify-content-around mb-5" do %>
+
+    <div class="card text-center" style="width: 18rem;">
+      <div class="card-body">
+        <p class="display-4 card-title"><%= Lead.prospectos.count %></p>
+        <p class="card-text">Prospectos</p>
+      </div>
+    </div>
+    <div class="card text-center" style="width: 18rem;">
+      <div class="card-body">
+        <p class="display-4 card-title"><%= Lead.interesados.count %></p>
+        <p class="card-text">Interesados</p>
+      </div>
+    </div>
+    <div class="card text-center" style="width: 18rem;">
+      <div class="card-body">
+        <p class="display-4 card-title"><%= Lead.clientes.count %></p>
+        <p class="card-text">Clientes</p>
+      </div>
+    </div>
+  <% end -%>
+
+  <%= tag.table class:"table table-striped" do%>
+    <%= tag.thead do %>
+      <%= tag.tr do %>
+        <%= tag.th "Email" %>
+        <%= tag.th "Nombre" %>
+        <%= tag.th "Teléfono" %>
+        <%= tag.th "Estatus" %>
+        <%= tag.th "Ingresado por" %>
+        <%= tag.th raw("Fecha <br> ingreso") %>
+        <%= tag.th "Conversaciones" %>
+        <%= tag.th "Opciones" %>
+      <% end -%>
+    <% end -%>
+
+    <%= tag.tbody do %>
+      <% @leads.each do |lead| %>
+        <%= tag.tr do %>
+          <%= tag.td lead.email, class: "align-middle" %>
+          <%= tag.td "#{lead.name.capitalize} #{lead.surname.capitalize}", class: "align-middle" %>
+          <%= tag.td lead.telephone, class: "align-middle" %>
+          <%= tag.td lead.status, class: "align-middle" %>
+          <%= tag.td lead.user.email, class: "align-middle" %>
+          <%= tag.td lead.created_at.strftime("%d/%m/%y"), class: "align-middle" %>
+          <%= tag.td lead.talks.count, class: "align-middle" %>
+          <%= tag.td class:"d-flex flex-column" do %>
+            <%= link_to "Ver", lead_path(lead)%>
+            <%= link_to "Editar", edit_lead_path(lead), class:"text-warning" %>
+            <%= link_to "Borrar", lead_path(lead), class:"text-danger", method: :delete, data: { confirm: "Are you sure?" } %>
+          <% end %>
+        <% end -%>
+      <% end %>
+    <% end %>
+  <% end -%>
+
+<% end %>

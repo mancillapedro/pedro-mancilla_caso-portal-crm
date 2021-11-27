@@ -1,0 +1,17 @@
+<%= tag.div class:"container mt-5" do%>
+  <%= tag.div class:"mb-3 d-flex justify-content-between" do %>
+    <%= link_to "Subir información", new_lead_talk_path(@lead), class:"btn btn-primary btn-lg" %>
+    <%= link_to "Volvel a prospectos", leads_path %>
+  <% end -%>
+  <% @lead.talks.each do |talk| %>
+    <div class="card">
+      <div class="card-body">
+        <p class="card-text"><%= talk.message %></p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Subido por: <%= talk.user.email %> <br> Publicado: <%= talk.created_at.strftime("%d/%m/%y") %></small>
+      </div>
+    </div>
+  <% end -%>
+<% end -%>
+
